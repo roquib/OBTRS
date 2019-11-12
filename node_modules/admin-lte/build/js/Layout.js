@@ -21,20 +21,36 @@ const Layout = (($) => {
   }
 
   const Selector = {
-    SIDEBAR        : '.main-sidebar',
     HEADER         : '.main-header',
+    MAIN_SIDEBAR   : '.main-sidebar',
+    SIDEBAR        : '.main-sidebar .sidebar',
     CONTENT        : '.content-wrapper',
+    BRAND          : '.brand-link',
     CONTENT_HEADER : '.content-header',
     WRAPPER        : '.wrapper',
     CONTROL_SIDEBAR: '.control-sidebar',
     LAYOUT_FIXED   : '.layout-fixed',
-    FOOTER         : '.main-footer'
+    FOOTER         : '.main-footer',
+    PUSHMENU_BTN   : '[data-widget="pushmenu"]',
+    LOGIN_BOX      : '.login-box',
+    REGISTER_BOX   : '.register-box'
   }
 
   const ClassName = {
-    HOLD        : 'hold-transition',
-    SIDEBAR     : 'main-sidebar',
-    LAYOUT_FIXED: 'layout-fixed'
+    HOLD           : 'hold-transition',
+    SIDEBAR        : 'main-sidebar',
+    CONTENT_FIXED  : 'content-fixed',
+    SIDEBAR_FOCUSED: 'sidebar-focused',
+    LAYOUT_FIXED   : 'layout-fixed',
+    NAVBAR_FIXED   : 'layout-navbar-fixed',
+    FOOTER_FIXED   : 'layout-footer-fixed',
+    LOGIN_PAGE     : 'login-page',
+    REGISTER_PAGE  : 'register-page',
+  }
+
+  const Default = {
+    scrollbarTheme : 'os-theme-light',
+    scrollbarAutoHide: 'l'
   }
 
   /**
@@ -43,7 +59,8 @@ const Layout = (($) => {
    */
 
   class Layout {
-    constructor(element) {
+    constructor(element, config) {
+      this._config  = config
       this._element = element
 
       this._init()
@@ -53,27 +70,48 @@ const Layout = (($) => {
 
     fixLayoutHeight() {
       const heights = {
-        window : $(window).height(),
-        header : $(Selector.HEADER).outerHeight(),
-        footer : $(Selector.FOOTER).outerHeight(),
-        sidebar: $(Selector.SIDEBAR).height()
+        window: $(window).height(),
+        header: $(Selector.HEADER).length !== 0 ? $(Selector.HEADER).outerHeight() : 0,
+        footer: $(Selector.FOOTER).length !== 0 ? $(Selector.FOOTER).outerHeight() : 0,
+        sidebar: $(Selector.SIDEBAR).length !== 0 ? $(Selector.SIDEBAR).height() : 0,
       }
-      const max     = this._max(heights)
 
-      $(Selector.CONTENT).css('min-height', max - (heights.header))
-      $(Selector.SIDEBAR).css('min-height', max - heights.header)
+      const max = this._max(heights)
+
+      if (max == heights.window) {
+        $(Selector.CONTENT).css('min-height', max - heights.header - heights.footer)
+      } else {
+        $(Selector.CONTENT).css('min-height', max - heights.header)
+      }
+
+      if ($('body').hasClass(ClassName.LAYOUT_FIXED)) {
+        $(Selector.CONTENT).css('min-height', max - heights.header - heights.footer)
+
+        if (typeof $.fn.overlayScrollbars !== 'undefined') {
+          $(Selector.SIDEBAR).overlayScrollbars({
+            className       : this._config.scrollbarTheme,
+            sizeAutoCapable : true,
+            scrollbars : {
+              autoHide: this._config.scrollbarAutoHide, 
+              clickScrolling : true
+            }
+          })
+        }
+      }
     }
 
     // Private
 
     _init() {
-      // Enable transitions
-      $('body').removeClass(ClassName.HOLD)
-
       // Activate layout height watcher
       this.fixLayoutHeight()
       $(Selector.SIDEBAR)
-        .on('collapsed.lte.treeview expanded.lte.treeview collapsed.lte.pushmenu expanded.lte.pushmenu', () => {
+        .on('collapsed.lte.treeview expanded.lte.treeview', () => {
+          this.fixLayoutHeight()
+        })
+
+      $(Selector.PUSHMENU_BTN)
+        .on('collapsed.lte.pushmenu shown.lte.pushmenu', () => {
           this.fixLayoutHeight()
         })
 
@@ -81,7 +119,15 @@ const Layout = (($) => {
         this.fixLayoutHeight()
       })
 
-      $('body, html').css('height', 'auto')
+      if (!$('body').hasClass(ClassName.LOGIN_PAGE) && !$('body').hasClass(ClassName.REGISTER_PAGE)) {
+        $('body, html').css('height', 'auto')
+      } else if ($('body').hasClass(ClassName.LOGIN_PAGE) || $('body').hasClass(ClassName.REGISTER_PAGE)) {
+        let box_height = $(Selector.LOGIN_BOX + ', ' + Selector.REGISTER_BOX).height()
+
+        $('body').css('min-height', box_height);
+      }
+
+      $('body.hold-transition').removeClass('hold-transition')
     }
 
     _max(numbers) {
@@ -99,18 +145,18 @@ const Layout = (($) => {
 
     // Static
 
-    static _jQueryInterface(operation) {
+    static _jQueryInterface(config) {
       return this.each(function () {
-        let data = $(this)
-          .data(DATA_KEY)
+        let data      = $(this).data(DATA_KEY)
+        const _config = $.extend({}, Default, $(this).data())
 
         if (!data) {
-          data = new Layout(this)
+          data = new Layout($(this), _config)
           $(this).data(DATA_KEY, data)
         }
 
-        if (operation) {
-          data[operation]()
+        if (config === 'init') {
+          data[config]()
         }
       })
     }
@@ -120,8 +166,17 @@ const Layout = (($) => {
    * Data API
    * ====================================================
    */
+
   $(window).on('load', () => {
     Layout._jQueryInterface.call($('body'))
+  })
+
+  $(Selector.SIDEBAR + ' a').on('focusin', () => {
+    $(Selector.MAIN_SIDEBAR).addClass(ClassName.SIDEBAR_FOCUSED);
+  })
+
+  $(Selector.SIDEBAR + ' a').on('focusout', () => {
+    $(Selector.MAIN_SIDEBAR).removeClass(ClassName.SIDEBAR_FOCUSED);
   })
 
   /**
@@ -131,7 +186,7 @@ const Layout = (($) => {
 
   $.fn[NAME] = Layout._jQueryInterface
   $.fn[NAME].Constructor = Layout
-  $.fn[NAME].noConflict  = function () {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT
     return Layout._jQueryInterface
   }

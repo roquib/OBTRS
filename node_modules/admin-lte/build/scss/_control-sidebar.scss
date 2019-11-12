@@ -1,51 +1,73 @@
-/*
- * Component: Control sidebar. By default, this is the right sidebar.
- */
+//
+// Component: Control Sidebar
+//
+ 
+html.control-sidebar-animate {
+  overflow-x: hidden;
+}
 
 .control-sidebar {
+  bottom: $main-footer-height;
   position: absolute;
   top: $main-header-height;
-  z-index: 830;
-
+  z-index: $zindex-control-sidebar;
+  
   &,
-  &:before {
-    width: $control-sidebar-width;
+  &::before {
+    bottom: $main-footer-height;
+    display: none;
     right: -$control-sidebar-width;
-    bottom: 0;
-    @include transition(right $transition-speed $transition-fn);
+    width: $control-sidebar-width;
+    @include transition(right $transition-speed $transition-fn, display $transition-speed $transition-fn);
   }
 
-  &:before {
-    top: 0;
+  &::before {
+    content: '';
     display: block;
     position: fixed;
-    content: " ";
+    top: 0;
     z-index: -1;
   }
 }
 
-// Control sidebar open state
-.control-sidebar-open {
-  @include media-breakpoint-up(md) {
-    .control-sidebar {
-      &,
-      &:before {
-        right: 0;
-      }
-    }
+body.text-sm {
+  .control-sidebar {
+    bottom: $main-footer-height-sm;
+    top: $main-header-height-sm;
+  }
+}
 
+.main-header.text-sm ~ .control-sidebar {
+  top: $main-header-height-sm;
+}
+
+.main-footer.text-sm ~ .control-sidebar {
+  bottom: $main-footer-height-sm;
+}
+
+.control-sidebar-push-slide {
     .content-wrapper,
     .main-footer {
-      margin-right: $control-sidebar-width;
+      @include transition(margin-right $transition-speed $transition-fn);
     }
   }
 
-  @include media-breakpoint-down(md) {
-    .control-sidebar {
-      &,
-      &:before {
-        right: 0;
-      }
+// Control sidebar open state
+.control-sidebar-open {
+  .control-sidebar {
+    display: block;
+
+    &,
+    &::before {
+      right: 0;
+    }
+  }
+
+  &.control-sidebar-push,
+  &.control-sidebar-push-slide {
+    .content-wrapper,
+    .main-footer {
+      margin-right: $control-sidebar-width;
     }
   }
 }
@@ -53,9 +75,20 @@
 // Control sidebar slide over content state
 .control-sidebar-slide-open {
   .control-sidebar {
+    display: block;
+
     &,
-    &:before {
+    &::before {
       right: 0;
+      @include transition(right $transition-speed $transition-fn, display $transition-speed $transition-fn);
+    }
+  }
+
+  &.control-sidebar-push,
+  &.control-sidebar-push-slide {
+    .content-wrapper,
+    .main-footer {
+      margin-right: $control-sidebar-width;
     }
   }
 }
@@ -69,8 +102,7 @@
   }
 
   //  Background
-  &,
-  &:before {
+  & {
     background: $sidebar-dark-bg;
   }
 
@@ -91,8 +123,8 @@
 
   // Tabs
   .nav-tabs {
-    border-bottom: 0;
     background-color: $sidebar-dark-hover-bg;
+    border-bottom: 0;
     margin-bottom: 5px;
 
     .nav-item {
@@ -100,10 +132,10 @@
     }
 
     .nav-link {
-      position: relative;
       border-radius: 0;
-      text-align: center;
       padding: 10px 20px;
+      position: relative;
+      text-align: center;
 
       &,
       &:hover,
@@ -117,8 +149,8 @@
       &:active,
       &:focus,
       &.active {
-        border-left-color: transparent;
         border-bottom-color: transparent;
+        border-left-color: transparent;
         border-top-color: transparent;
         color: $sidebar-dark-hover-color;
       }
@@ -139,9 +171,8 @@
   color: lighten($sidebar-light-color, 10%);
 
   //  Background
-  &,
-  &:before {
+  & {
     background: $sidebar-light-bg;
-    border-left: 1px solid $gray-500;
+    border-left: $main-header-bottom-border;
   }
 }
