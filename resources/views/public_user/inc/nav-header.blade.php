@@ -44,7 +44,7 @@
           {{-- islamic book menu --}}
           <li class="nav-item"><a href="#" class="nav-link
               ">
-            <i class="fa fa-ticket-alt text-danger"></i>
+            <i class="fa fa-ticket text-danger"></i>
             Cancel Ticket</a></li>
           <li class="nav-item"><a href="#" class="nav-link
               ">
