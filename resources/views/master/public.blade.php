@@ -31,14 +31,14 @@
   <div id="vue-user">
     <!-- navbar-->
     @include('public_user.inc.nav-header')
-
+    <br><br><br><br>
     {{-- ==========   HEADER END  ======== --}}
-
+{{-- 
     <div id="all">
-      <div id="content">
+      <div id="content"> --}}
         @yield('main-content')
-      </div>
-    </div>
+{{--       </div>
+    </div> --}}
     @include('public_user.inc.footer')
   </div>
   <!-- JavaScript files-->

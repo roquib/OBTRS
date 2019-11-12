@@ -1,10 +1,8 @@
 <!-- navbar-->
 <header class="header">
-
-
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <nav class="navbar navbar-expand-lg  fixed-top navbar-light" style="background-color: #ddd;">
     {{-- container --}}
-    <div class="container">
+    <div class="container-fluid">
       {{-- Brand Logo --}}
       <a href="{{ route('home') }}" class="navbar-brand home">
         <img style="height: 50px; width: 50px" src="{{ asset('img/logo.png') }}" alt="Redbus logo"
@@ -35,24 +33,41 @@
         <ul class="navbar-nav mr-auto">
 
           {{-- home menu --}}
-          <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">
+          <i class="fas fa-home"></i>
+          Home</a></li>
           {{-- novel menu --}}
-          <li class="nav-item"><a href="{{ route('novel') }}" class="nav-link">Novel</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">
+            <i class="fas fa-paper-plane"></i>
+          Verify Bikash</a></li>
 
           {{-- islamic book menu --}}
-          <li class="nav-item"><a href="{{ route('islamic') }}" class="nav-link
-              ">Islamic Book</a></li>
+          <li class="nav-item"><a href="#" class="nav-link
+              ">
+            <i class="fas fa-ticket-alt"></i>
+            Cancel Ticket</a></li>
+          <li class="nav-item"><a href="#" class="nav-link
+              ">
+              <i class="fas fa-bus"></i>
+            Reservation</a></li>
 
           {{-- bestseller menu --}}
           {{-- <li class="nav-item"><a href="{{ route('bestseller') }}" class="nav-link @if($activePage == "bestseller")
           active @endif">Best Seller</a></li> --}}
-
-          {{-- contact menu --}}
-          <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
+        </ul>
+        <ul class="navbar-nav my-auto">
+           {{-- contact menu --}}
+          <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">
+            <i class="fas fa-comments"></i>
+          Contact</a></li>
 
           {{-- about us menu --}}
-          <li class="nav-item"><a href="{{ route('about-us') }}" class="nav-link">About Us</a></li>
-
+          <li class="nav-item"><a href="{{ route('about-us') }}" class="nav-link">
+          <i class="fas fa-info-circle"></i>
+          About Us</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">
+            <i class="fa fa-phone"></i>
+          Help</a></li>
         </ul>
 
       </div>

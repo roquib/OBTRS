@@ -5,15 +5,15 @@ Online Bus Ticket Reservation System
 @endsection
 @section('main-content')
 {{-- {{dd($data)}} --}}
-<div class="container">
-    <div class="row">
+<div class="container-fluid">
+    {{-- <div class="row">
         <div class="col-md-8 mx-auto">
             @if (session()->has('success'))
             @include('public_user.success-alert')
             @endif
         </div>
-    </div>
-    <div class="row">
+    </div> --}}
+   {{--  <div class="row">
         <div class="col-xs-12 col-sm-12 border-right-1">
             <div class="row d-flex">
                 <div class="col-xs-12 col-sm-5 col-md-6 no-padding">
@@ -27,7 +27,7 @@ Online Bus Ticket Reservation System
             </div>
 
         </div>
-    </div>
+    </div> --}}
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-md-12">
