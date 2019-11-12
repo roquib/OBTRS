@@ -1,0 +1,55 @@
+
+
+
+.copyright-text {
+  border-top:    1px solid  gray;
+  border-bottom: 2px solid  gray;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  line-height: 35px;
+}
+
+a, .brand-title{
+  text-decoration: none;
+  color: white;
+}
+.fa {
+    padding: 5px;
+  font-size: 20px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 2px 2px;
+}
+
+
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  border-radius: 2px;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+  border-radius: 2px;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+  border-radius: 2px;
+}
+
+.fa-envelope {
+  background: #007bb5;
+  color: white;
+  border-radius: 2px;
+}

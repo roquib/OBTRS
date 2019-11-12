@@ -1,0 +1,113 @@
+/*
+=======================================================
+
+	Footer
+
+=======================================================
+*/
+
+/*---------------------------------------------Footer Style-------------------------------------------*/
+footer .footer-top {
+	padding: 70px 0px;
+	background: #242424;
+}
+footer .footer-top .footer-widget{
+	margin-top: 30px;
+}
+footer .footer-top .footer-widget img {
+	margin-bottom: 20px;
+}
+footer .footer-top .footer-widget p {
+	color: #8E8F91;
+	font-size: 15px;
+	line-height: 30px;
+}
+footer .footer-top .footer-widget .socil-icon ul {
+	padding-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+footer .footer-top .footer-widget .socil-icon ul li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 20px;
+}
+footer .footer-top .footer-widget .socil-icon ul li a i {
+	color: #7D7D7D;
+	border: 1px solid #7D7D7D;
+	height: 40px;
+	width: 40px;
+  border-radius: 5px;
+	padding: 5px;
+	font-size: 18px;
+	transition: .5s;
+}
+
+
+footer .footer-top .footer-widget ul li a i:hover{
+	background: rgba(20,195,220,1);
+	border: 1px solid #14c3dc;
+	transition: .5s;
+	color: #ffffff;
+}
+footer .footer-top .footer-menu h3{
+	color: #FFFFFF;
+	margin-top: 0px;
+	text-transform: uppercase;
+	position: relative;
+}
+footer .footer-top .footer-menu h3:before{
+	content: '';
+	position: absolute;
+	bottom: -10px;
+	left: 0;
+	background: #14B5F8;
+	width: 50px;
+	height: 2px;
+}
+footer .footer-top .footer-widget ul{
+	margin-top: 30px;
+}
+footer .footer-top .footer-widget ul li{
+	list-style: none;
+	margin-top: 10px;
+	font-size: 15px;
+	color: #8E8F91;
+	text-transform: capitalize;
+}
+footer .footer-top .footer-widget ul li a{
+	color: #8E8F91;
+	text-decoration: none;
+	transition: .5s;
+	text-transform: capitalize;
+}
+footer .footer-top .footer-widget ul li a:hover{
+	color: #18A5D2;
+	transition: .5s;
+}
+
+footer .footer-bottom{
+	background: #2E2D2D;
+	padding: 20px 0px;
+}
+footer .footer-bottom .copyright{
+	text-align: center;
+	color: #ffffff;
+}
+.copyright h4 {
+	font-size: 15px;
+	color: #8E8F91;
+	text-transform: capitalize;
+}
+
+footer .copyright h4 a {
+	color: #8E8F91;
+	text-decoration: none;
+	transition: .5s;
+	text-transform: uppercase;
+}
+footer .copyright h4 a:hover{
+	color: #14A5E4;
+	transition: .5s;
+}

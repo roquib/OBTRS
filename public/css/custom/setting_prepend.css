@@ -1,0 +1,45 @@
+/* Remove Spinner From Number Input Field */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.parent-top .label_parent {
+    border-radius: 50px;
+    height: 35px;
+    background-color: #fdfff5;
+}
+.label_parent label {
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 13px;
+    font-style: italic;
+    background-color: #fdfff5;
+    width: 140px;
+    height: 35px;
+}
+
+select, textarea {
+  width: calc(100% - 140px);
+}
+
+.parent-top input {
+    height: 35px;
+}
+
+::-webkit-input-placeholder, ::-webkit-textarea-placeholder {
+    font-style: italic;
+    /* font-weight: bold; */
+}
+
+::-moz-placeholder {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input:focus {
+  outline-width: 0;
+}

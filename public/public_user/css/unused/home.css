@@ -1,0 +1,76 @@
+/* Make the carousel image fully responsive */
+
+
+.head-carousel {
+  height:270px;
+  border-top:
+  2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: 270px;
+}
+
+
+.text-black {
+  color: black;
+}
+.underline-none {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+  color: #47B5F2;
+}
+li {
+  list-style: none;
+}
+
+/*
+    ============================
+      Top Search Button Design
+    ============================
+*/
+.top_search,
+.top_social{
+	display: table-cell;
+}
+.top_search{
+	text-align: right;
+	position: relative;
+	width: 65%;
+}
+.top_search .search {
+	box-shadow: none;
+	outline: none;
+	background: rgba(235, 236, 238, 1);
+	border: none;
+	height: 30px;
+	padding: 5px 20px;
+	color: #000000;
+	font-size: 15px;
+	transition: width 0.8s ease-in-out;
+	width: 50%;
+	border: 1px solid #EBECEE;
+}
+.top_search .search:focus{
+	border: 1px solid #47B5F2;
+	width: 100%;
+}
+.top_search button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 15px;
+	border: none;
+	background: #47B5F2;
+	height: 30px;
+	color: #ffffff;
+}
+/*
+    ============================
+      Top Search Button Design
+    ============================
+*/
