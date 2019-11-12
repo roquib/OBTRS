@@ -34,21 +34,21 @@
 
           {{-- home menu --}}
           <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-home text-danger"></i>
           Home</a></li>
           {{-- novel menu --}}
           <li class="nav-item"><a href="#" class="nav-link">
-            <i class="fas fa-paper-plane"></i>
+            <i class="fas fa-paper-plane text-danger"></i>
           Verify Bikash</a></li>
 
           {{-- islamic book menu --}}
           <li class="nav-item"><a href="#" class="nav-link
               ">
-            <i class="fas fa-ticket-alt"></i>
+            <i class="fas fa-ticket-alt text-danger"></i>
             Cancel Ticket</a></li>
           <li class="nav-item"><a href="#" class="nav-link
               ">
-              <i class="fas fa-bus"></i>
+              <i class="fas fa-bus text-danger"></i>
             Reservation</a></li>
 
           {{-- bestseller menu --}}
@@ -58,15 +58,15 @@
         <ul class="navbar-nav my-auto">
            {{-- contact menu --}}
           <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">
-            <i class="fas fa-comments"></i>
+            <i class="fas fa-comments text-danger"></i>
           Contact</a></li>
 
           {{-- about us menu --}}
           <li class="nav-item"><a href="{{ route('about-us') }}" class="nav-link">
-          <i class="fas fa-info-circle"></i>
+          <i class="fas fa-info-circle text-danger"></i>
           About Us</a></li>
           <li class="nav-item"><a href="#" class="nav-link">
-            <i class="fa fa-phone"></i>
+            <i class="fa fa-phone text-danger"></i>
           Help</a></li>
         </ul>
 
