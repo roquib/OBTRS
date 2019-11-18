@@ -16,6 +16,8 @@ Route::get('/profile', 'AdminController@profile')->name('profile');
 
 Route::get('/category', 'AdminController@category')->name('category');
 Route::get('/group', 'AdminController@group')->name('group');
+Route::post('/booking/bus/seat/release', 'PagesController@bookingRelease')->name('bookingRelease');
+Route::post('/booking/bus/seat/reserve', 'PagesController@bookingReserve')->name('bookingReserve');
 Route::get('/author', 'AdminController@author')->name('author');
 Route::get('/tickets', 'AdminController@ticket')->name('ticket');
 Route::get('/details', 'AdminController@details')->name('details');
@@ -77,6 +79,7 @@ Route::prefix('home')->group(function () {
   Route::get('/novel', 'PagesController@novel')->name('novel');
   Route::get('/islamic', 'PagesController@islamic')->name('islamic');
   Route::get('/bestseller', 'PagesController@bestseller')->name('bestseller');
+  Route::post('/get-trip-info', 'PagesController@getTripInfo')->name('getTripInfo');
   Route::get('/contact', 'PagesController@contact')->name('contact');
   Route::get('/about-us', 'PagesController@about_us')->name('about-us');
 });

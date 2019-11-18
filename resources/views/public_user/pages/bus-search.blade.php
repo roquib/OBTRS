@@ -5,7 +5,7 @@ Online Bus Ticket Reservation System
 @endsection
 @section('main-content')
 {{-- {{dd($data)}} --}}
-<div class="container-fluid">
+<div class="container">
     {{-- <div class="row">
         <div class="col-md-8 mx-auto">
             @if (session()->has('success'))
@@ -13,108 +13,124 @@ Online Bus Ticket Reservation System
             @endif
         </div>
     </div> --}}
-   {{--  <div class="row">
+    {{--  <div class="row">
         <div class="col-xs-12 col-sm-12 border-right-1">
             <div class="row d-flex">
                 <div class="col-xs-12 col-sm-5 col-md-6 no-padding">
                     <div class="details">
                         <p class="bold_ticket_text" id=""> {{$data->fromcity}} to {{$data->tocity}} </p>
 
-                        <p class="bold_ticket_text">
-                            {{$data->doj}} </p>
-                    </div>
+    <p class="bold_ticket_text">
+        {{$data->doj}} </p>
+</div>
+</div>
+</div>
+
+</div>
+</div> --}}
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <!-- list_rows starts here -->
+            <div id="bus_tckt_rows" class="list_rows 2 table-responsive">
+                <div class="filter_value hidden">
+                    <ul class="list-inline">
+                        <li class="filters_text_style"> Filter(s): </li>
+                    </ul>
                 </div>
+                <table id="trips" class="tablesorter tablesorter-default">
+                    <thead style="border-bottom: 5px solid #F7F7F7; color: #828282;">
+                        <tr>
+                            <th class="tbl_th1 th_text_color header">
+                                Operator <span style="font-weight: normal;">(Bus Type)</span>
+                            </th>
+                            <th class="tbl_th3 header" style="color: #828282;">
+                                Dep. Time
+                            </th>
+                            <th class="tbl_th4 header" style="color: #828282;">
+                                Arr. Time
+                            </th>
+                            <th class="tbl_th5 header" style="color: #828282;">
+                                Seats Available
+                            </th>
+                            <th class="tbl_th6 header" style="color: #828282;">
+                                Fare
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($result as $detail)
+                        <tr trip-id="{{$detail->trip_id}}" class="trip-row" data-trip="
+                            {{$detail}}
+                            " id="trip_id">
+                            <td class="tbl_col1 border-fix-seat" data-title="Operator">
+
+                                <ul>
+                                    <li class="op_name">{{$detail->company_name}}</li>
+                                    <li class="bus_type" style="margin-bottom: 5px;">{{$detail->bus_desc}}
+                                    </li>
+                                    <li class="bus_type"><b style="color:#757A7E;">Route:</b>
+                                        {{$detail->trip_heading}}
+                                    </li>
+
+                                </ul>
+
+                            </td>
+                            <td class="tbl_col3 border-fix-seat" data-title="Dep. Time">
+                                {{$detail->departure_time}} <br>
+
+                            </td>
+                            <td class="tbl_col4 border-fix-seat" data-title="Arr. Time">
+                                {{$detail->arrival_time}} </td>
+                            <td class="tbl_col5 border-fix-seat" data-title="Seats Available">
+                                {{$detail->available_seats}} </td>
+                            <td class="tbl_col6 border-fix-seat" data-title="Fare"
+                                style="text-align:right;  position: relative;">
+                                <ul class="list-inline">
+
+                                    <li class="fare_li" style="text-align: right;float:none;font-size: 20px;">
+                                        ৳ {{$detail->economy_class_fare}} </li>
+
+                                </ul>
+                                <div class="clearfix"></div>
+                                <ul>
+                                    <li class="seats-button"><button type="submit" trip_id="{{$detail->trip_id}}"
+                                            triproute="{{$detail->trip_route_id}}" operatorid="{{$detail->operator_id}}"
+                                            tocity="{{$detail->destination_city_name}}"
+                                            class="btn btn-default btn-sm btnSubmit seatsLayout" data-toggle="modal"
+                                            data-target="#bus_seat">View
+                                            Seats</button>
+                                    </li>
+
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr id="trip{{$detail->trip_id}}-amenities" class="trip-row-amenities expand-child text-dark">
+                                                        <td id="tbl_offer" colspan="6" style="border-bottom: 15px solid #f7f7f7;">
+                                                            <span class="tr-bottom-policies" style="font-size: 14px;"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'cancelPolicy')">Cancellation Policy</a><span></span>
+                                                                <span class="tr-bottom-policies"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'boardingPoints')">Boarding point</a><span></span>.
+                                                                <span class="tr-bottom-policies"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'droppingPoints')">Dropping point</a><span></span>.
+                                                                <span class="tr-bottom-policies"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'facilities')">Facilities</a><span></span>
+                                                                </span></span></span></span><table>
+                                                            
+                                                                <tbody><tr class="">
+                                                                </tr>
+                                                               
+                                                                <tr class="trseats" style="display: table-row;">
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody></table>
+                                                        </td>
+                                                    </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-
         </div>
-    </div> --}}
-    <div class="clearfix"></div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="padding-left-15">
-                    <!-- list_rows starts here -->
-                    <div id="bus_tckt_rows" class="list_rows 2 table-responsive">
-                        <div class="filter_value hidden">
-                            <ul class="list-inline">
-                                <li class="filters_text_style"> Filter(s): </li>
-                            </ul>
-                        </div>
-                        <table id="trips" class="tablesorter tablesorter-default">
-                            <thead style="border-bottom: 5px solid #F7F7F7; color: #828282;">
-                                <tr>
-                                    <th class="tbl_th1 th_text_color header">
-                                        Operator <span style="font-weight: normal;">(Bus Type)</span>
-                                    </th>
-                                    <th class="tbl_th3 header" style="color: #828282;">
-                                        Dep. Time
-                                    </th>
-                                    <th class="tbl_th4 header" style="color: #828282;">
-                                        Arr. Time
-                                    </th>
-                                    <th class="tbl_th5 header" style="color: #828282;">
-                                        Seats Available
-                                    </th>
-                                    <th class="tbl_th6 header" style="color: #828282;">
-                                        Fare
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($result as $detail)
-                                <tr id="{{$detail->trip_id}}" class="trip-row">
-                                    <td class="tbl_col1 border-fix-seat" data-title="Operator">
-
-                                        <ul>
-                                            <li class="op_name">{{$detail->company_name}}</li>
-                                            <li class="bus_type" style="margin-bottom: 5px;">{{$detail->bus_desc}}
-                                            </li>
-                                            <li class="bus_type"><b style="color:#757A7E;">Route:</b>
-                                                {{$detail->trip_heading}}
-                                            </li>
-
-                                        </ul>
-
-                                    </td>
-                                    <td class="tbl_col3 border-fix-seat" data-title="Dep. Time">
-                                        {{$detail->departure_time}} <br>
-
-                                    </td>
-                                    <td class="tbl_col4 border-fix-seat" data-title="Arr. Time">
-                                        {{$detail->arrival_time}} </td>
-                                    <td class="tbl_col5 border-fix-seat" data-title="Seats Available">
-                                        {{$detail->available_seats}} </td>
-                                    <td class="tbl_col6 border-fix-seat" data-title="Fare"
-                                        style="text-align:right;  position: relative;">
-                                        <ul class="list-inline">
-
-                                            <li class="fare_li" style="text-align: right;float:none;font-size: 20px;">
-                                                ৳ {{$detail->economy_class_fare}} </li>
-
-                                        </ul>
-                                        <div class="clearfix"></div>
-                                        <ul>
-                                            <li class="seats-button"><button type="submit" id="{{$detail->trip_id}}"
-                                                    triproute="{{$detail->trip_route_id}}"
-                                                    operatorid="{{$detail->operator_id}}"
-                                                    tocity="{{$detail->destination_city_name}}"
-                                                    class="btn btn-default btn-sm btnSubmit seatsLayout"
-                                                    data-toggle="modal" data-target="#bus_seat">View
-                                                    Seats</button>
-                                            </li>
-
-                                        </ul>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+</div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="bus_seat" tabindex="-1" role="dialog" aria-labelledby="bus_seat" aria-hidden="true">
@@ -152,25 +168,28 @@ Online Bus Ticket Reservation System
                             </td>
                         </tr>
                         @for ($i = 0; $i < 10; $i++) <tr style="height: 30px !important">
-                            <td style="width: 50px; margin:5px">
-                                <div class="text-center p-10 seat" data-toggle="tooltip" onclick="chooseSeat(this)">
+                            @foreach ($result as $detail)
+                            {{-- <td style="width: 50px; margin:5px" data-seat="{{$detail->trip_id.' '.$seatRow[$i].'1'}}"> --}}
+                            <td style="width: 50px; margin:5px" data-trip="{{$detail}}" data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'1')}}">
+                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'1'}}"  data-toggle="tooltip" onclick="chooseSeat(this)">
                                     {{$seatRow[$i].'1'}}
                                 </div>
                             </td>
-                            <td style="width: 50px; margin:5px;">
-                                <div class="text-center p-10 seat">{{$seatRow[$i].'2'}}</div>
+                            <td style="width: 50px; margin:5px;"  data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'2')}}">
+                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'2'}}" data-toggle="tooltip" onclick="chooseSeat(this)">{{$seatRow[$i].'2'}}</div>
                             </td>
                             <td style=" width: 50px; margin:5px;">
                                 <div class="text-center p-10" style="display: none">{{$seatRow[$i].'1'}}</div>
                             </td>
-                            <td style="width: 50px; margin:5px">
-                                <div class="text-center p-10 seat">{{$seatRow[$i].'3'}}</div>
+                            <td style="width: 50px; margin:5px"  data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'3')}}">
+                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'3'}}" data-toggle="tooltip" onclick="chooseSeat(this)">{{$seatRow[$i].'3'}}</div>
                             </td>
-                            <td style="width: 50px; margin:5px">
-                                <div class="text-center p-10 seat">{{$seatRow[$i].'4'}}</div>
+                            <td style="width: 50px; margin:5px"  data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'4')}}">
+                                <div class="text-center p-10 seat"title="{{$seatRow[$i].'4'}}" data-toggle="tooltip" onclick="chooseSeat(this)">{{$seatRow[$i].'4'}}</div>
                             </td>
 
                             </tr>
+                            @endforeach
                             @endfor
                     </table>
                     <p id="seatError" class="hidden">Sorry! this ticket is not available now.</p>
@@ -249,17 +268,97 @@ Online Bus Ticket Reservation System
 @endsection
 @section('additional_script')
 <script>
+    $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
     function chooseSeat(seatObj) {
         $('#seatError').addClass('hidden');
         var $seatObj = $(seatObj);
+        var sData = $seatObj.parent().data('seat');
+        var tripData = $seatObj.parent().data('trip');
         var $seatTableBody = $('#tbl_price_details').find('table#tbl_seat_list').find('tbody:eq(0)');
-        console.log($seatObj);
-        console.log($seatTableBody);
+        var discountAmount = 0;
+        if($seatObj.hasClass('selected')) {
+            $seatObj.removeClass("selected");
+            $('#'+sData.ticket_id).remove();
+            $.ajax({
+                url: '/booking/bus/seat/release',
+                type: 'POST',
+                data: {"ticketid":sData.ticket_id,
+                    "routeid":tripData.trip_route_id,
+                    "searchid":$('#www-search-id').val()}
+            }).done(function(data) {
+            });
+            var ticketPrice = 0;
+            var discountValue = 0;
+            var discountType = 1;
+            doTicketsTotal(discountValue);
+        }else {
+            maxTickets = 3;
+            if ($seatTableBody.find('tr').length<maxTickets) {
+                $seatObj.addClass('selected');
+                $seatObj.removeClass('seat');
+                var ticketPrice = 0;
+                var discountTicketPrice = 0;
+                var ticketPriceString = '';
+                var discountValue = 0;
+                var discountType = 1;
+                ticketPrice = tripData.economy_class_fare -discountValue;
+                if(0>0) {
+                    ticketPriceString = '<strike style="color:red; font-size: 10px;">' + ticketPrice + '</strike> ' + discountTicketPrice + '.00';
+                }else {
+                    ticketPriceString = ticketPrice;
+                }
+                var tr = '<tr id="' + sData.ticket_id + '"><td width="115">' + sData.seat_number + '</td><td width="100">' + ticketPriceString + '</td><td>' + "Economy" + '<input type="hidden" name="ticket[]" value="' + sData.ticket_id + '"/><input type="hidden" name="triproute[]" value="' + tripData.trip_route_id + '"/></td></tr>';
+                $seatTableBody.append(tr);
+                $.ajax({
+                    url: "{{ route('bookingReserve') }}",
+                    type: "POST",
+                    data: {
+                        "ticketid":sData.ticket_id,
+                    "routeid":tripData.trip_route_id,
+                    }
+                })
+                .done(function(data){
+                    if (data.ticket_id) {
+                        $seatObj.removeClass('selected');
+                        $('#' + sData.ticket_id).remove();
+                        $('#seatError').text('Sorry! this ticket is not available now.');
+                        $('#seatError').removeClass('hidden');
+                        $seatObj.addClass('booked');
+                        $seatObj.removeAttr('onclick');
+                    }
+                });
+              doTicketsTotal(discountValue);
+            }else {
+                $('#seatError').html('<div class="error-partial col-lg-12" style="padding:5px 20px;margin-top:0px;"><i class="fa fa-exclamation-triangle" style="font-size:20px;"></i><div class="error-message-div" style="padding:2px;">Maximum of ' + maxTickets + ' seat(s) can be booked at-a-time.</div></div>');
+                $('#seatError').removeClass('hidden');
+            }
+        }
+    }
+    function doTicketsTotal(discountAmount)
+    {
+        var ticketsTotal = 0;
+        var $seatTableBody = $('#tbl_price_details').find('table#tbl_seat_list').find('tbody:eq(0)');
+        var $seatTableTr = $seatTableBody.find('tr');
+        $.each($seatTableTr, function(index, trObj) {
+            ticketsTotal += parseFloat($(trObj).find('td:eq(1)').text()) - discountAmount;
+        });
+        $('div#tickets_total').html('<p><b>Total: ' + ticketsTotal + '</b></p>');
     }
 </script>
 @endsection
 @section('addition-styles')
 <style>
+    .booked {
+        background: #cc5560;
+    }
+    #tbl_offer {
+    border-bottom: 1px dashed #97999b;
+    font-size: 11px;
+    }
     div.seat {
         cursor: pointer;
         background: #d3d3d3;
@@ -268,12 +367,12 @@ Online Bus Ticket Reservation System
     div.seat:hover {
         background: #54c581;
     }
-
+    .selected {
+        background: #54c581;
+    }
     .t_total {
-        padding: 5px;
         border: #dbdbdb 1px solid;
         font-size: 14px;
-        margin-bottom: 20px;
         background: #f7f7f7;
     }
 

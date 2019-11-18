@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class Detail extends Model
 {
     protected $fillable = [
@@ -36,5 +36,10 @@ class Detail extends Model
     public function company()
     {
         return $this->belongsTo('App\Operator');
+    }
+    public function findTicket($trip_id,$seat_number)
+    {
+        // return json_encode(["trip_id"=> $trip_id,"seat_number" => $seat_number]);
+        return json_encode(DB::table('sell_tickets')->where('trip_id',$trip_id)->where('seat_number',$seat_number)->get()[0]);
     }
 }

@@ -8,23 +8,33 @@ use App\Detail;
 use App\Group;
 use App\Product;
 use App\Publication;
+use App\SellTicket;
 use Cart;
 use DB;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+  public function bookingRelease(Request $request)
+  {
+    return json_encode(["ticketid" => $request->ticketid,"routeid"=>$request->routeid]);
+  }
+  public function bookingReserve(Request $request)
+  {
+    return json_encode(["ticketid" => $request->ticketid,"routeid"=>$request->routeid]);
+  }
   public function search(Request $request)
   {
     $fromcity = $request->fromcity;
     $tocity = $request->tocity;
     $doj = $request->doj;
     $dor = $request->dor;
-    $result = Detail::where('origin_city_name', '=',$fromcity)
-              ->where('destination_city_name','=',$tocity)
-              ->where('departure_date','=',$doj)
-              ->get();
-    return view('public_user.pages.bus-search', ['result' => $result,'data' => $request]);
+    $result = Detail::where('origin_city_name', '=', $fromcity)
+      ->where('destination_city_name', '=', $tocity)
+      ->where('departure_date', '=', $doj)
+      ->get();
+    $sellTickets = SellTicket::all();
+    return view('public_user.pages.bus-search', ['result' => $result, 'data' => $request, 'sellTickets' => $sellTickets]);
   }
   public function index(Request $request)
   {
@@ -57,7 +67,13 @@ class PagesController extends Controller
     );
   }
 
-
+  // public function getTripInfo(Request $request)
+  // {
+  //   $trip = SellTicket::where('trip_id', $request->trip_id)->get();
+  //   if ($request->ajax()) {
+  //     return response($trip);
+  //   }
+  // }
   //  get all product with selected category
   public function productByCategory($id)
   {
