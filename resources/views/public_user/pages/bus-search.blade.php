@@ -5,6 +5,7 @@ Online Bus Ticket Reservation System
 @endsection
 @section('main-content')
 {{-- {{dd($data)}} --}}
+<input type="hidden" id="www-search-id" name="www-search-id" value="MA==">
 <div class="container">
     {{-- <div class="row">
         <div class="col-md-8 mx-auto">
@@ -107,22 +108,36 @@ Online Bus Ticket Reservation System
                             </td>
                         </tr>
                         <tr id="trip{{$detail->trip_id}}-amenities" class="trip-row-amenities expand-child text-dark">
-                                                        <td id="tbl_offer" colspan="6" style="border-bottom: 15px solid #f7f7f7;">
-                                                            <span class="tr-bottom-policies" style="font-size: 14px;"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'cancelPolicy')">Cancellation Policy</a><span></span>
-                                                                <span class="tr-bottom-policies"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'boardingPoints')">Boarding point</a><span></span>.
-                                                                <span class="tr-bottom-policies"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'droppingPoints')">Dropping point</a><span></span>.
-                                                                <span class="tr-bottom-policies"><a class="text-dark badge badge-light" href="javascript:void(0)" onclick="showTripPolicies(4615110,'facilities')">Facilities</a><span></span>
-                                                                </span></span></span></span><table>
-                                                            
-                                                                <tbody><tr class="">
-                                                                </tr>
-                                                               
-                                                                <tr class="trseats" style="display: table-row;">
-                                                                    <td></td>
-                                                                </tr>
-                                                            </tbody></table>
-                                                        </td>
-                                                    </tr>
+                            <td id="tbl_offer" colspan="6" style="border-bottom: 15px solid #f7f7f7;">
+                                <span class="tr-bottom-policies" style="font-size: 14px;"><a
+                                        class="text-dark badge badge-light" href="javascript:void(0)"
+                                        onclick="showTripPolicies(4615110,'cancelPolicy')">Cancellation
+                                        Policy</a><span></span>
+                                    <span class="tr-bottom-policies"><a class="text-dark badge badge-light"
+                                            href="javascript:void(0)"
+                                            onclick="showTripPolicies(4615110,'boardingPoints')">Boarding
+                                            point</a><span></span>.
+                                        <span class="tr-bottom-policies"><a class="text-dark badge badge-light"
+                                                href="javascript:void(0)"
+                                                onclick="showTripPolicies(4615110,'droppingPoints')">Dropping
+                                                point</a><span></span>.
+                                            <span class="tr-bottom-policies"><a class="text-dark badge badge-light"
+                                                    href="javascript:void(0)"
+                                                    onclick="showTripPolicies(4615110,'facilities')">Facilities</a><span></span>
+                                            </span></span></span></span>
+                                <table>
+
+                                    <tbody>
+                                        <tr class="">
+                                        </tr>
+
+                                        <tr class="trseats" style="display: table-row;">
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -133,7 +148,8 @@ Online Bus Ticket Reservation System
 </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="bus_seat" tabindex="-1" role="dialog" aria-labelledby="bus_seat" aria-hidden="true">
+<div class="modal fade view_seat_bg" id="bus_seat" tabindex="-1" role="dialog" aria-labelledby="bus_seat"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -169,23 +185,32 @@ Online Bus Ticket Reservation System
                         </tr>
                         @for ($i = 0; $i < 10; $i++) <tr style="height: 30px !important">
                             @foreach ($result as $detail)
-                            {{-- <td style="width: 50px; margin:5px" data-seat="{{$detail->trip_id.' '.$seatRow[$i].'1'}}"> --}}
-                            <td style="width: 50px; margin:5px" data-trip="{{$detail}}" data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'1')}}">
-                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'1'}}"  data-toggle="tooltip" onclick="chooseSeat(this)">
+                            {{-- <td style="width: 50px; margin:5px" data-seat="{{$detail->trip_id.' '.$seatRow[$i].'1'}}">
+                            --}}
+                            <td style="width: 50px; margin:5px" data-trip="{{$detail}}"
+                                data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'1')}}">
+                                <div class="text-center p-10 {{$detail->seatAvailable($detail->trip_id,$seatRow[$i].'1')  == 0 ? 'booked disabled' : 'seat' }}"
+                                    title="{{$seatRow[$i].'1'}}" data-toggle="tooltip" onclick="chooseSeat(this)">
                                     {{$seatRow[$i].'1'}}
                                 </div>
                             </td>
-                            <td style="width: 50px; margin:5px;"  data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'2')}}">
-                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'2'}}" data-toggle="tooltip" onclick="chooseSeat(this)">{{$seatRow[$i].'2'}}</div>
+                            <td style="width: 50px; margin:5px;"
+                                data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'2')}}">
+                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'2'}}" data-toggle="tooltip"
+                                    onclick="chooseSeat(this)">{{$seatRow[$i].'2'}}</div>
                             </td>
                             <td style=" width: 50px; margin:5px;">
                                 <div class="text-center p-10" style="display: none">{{$seatRow[$i].'1'}}</div>
                             </td>
-                            <td style="width: 50px; margin:5px"  data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'3')}}">
-                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'3'}}" data-toggle="tooltip" onclick="chooseSeat(this)">{{$seatRow[$i].'3'}}</div>
+                            <td style="width: 50px; margin:5px"
+                                data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'3')}}">
+                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'3'}}" data-toggle="tooltip"
+                                    onclick="chooseSeat(this)">{{$seatRow[$i].'3'}}</div>
                             </td>
-                            <td style="width: 50px; margin:5px"  data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'4')}}">
-                                <div class="text-center p-10 seat"title="{{$seatRow[$i].'4'}}" data-toggle="tooltip" onclick="chooseSeat(this)">{{$seatRow[$i].'4'}}</div>
+                            <td style="width: 50px; margin:5px"
+                                data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'4')}}">
+                                <div class="text-center p-10 seat" title="{{$seatRow[$i].'4'}}" data-toggle="tooltip"
+                                    onclick="chooseSeat(this)">{{$seatRow[$i].'4'}}</div>
                             </td>
 
                             </tr>
@@ -243,15 +268,22 @@ Online Bus Ticket Reservation System
                             </table>
                         </div>
                         <div id="tickets_total" class="t_total">
-                            <p><b>Total: 480</b></p>
+                            <p><b>Total: 0</b></p>
                         </div>
-                        <div class="form-group">
-                            <label for="bpt">Choose Boarding Point <span>*</span></label>
-                            <select id="boardingpoint" name="boardingpoint" class="form-control">
-                                <option value="0"> -- Boarding points -- </option>
-                                <option value="52418971">Mohakhali Bus Point (10:30 PM)</option>
-                            </select>
-                        </div>
+                        <form id="confirmbooking" method="post" action="/booking/bus/confirm">
+                            @csrf
+                            <div class="form-group">
+                                <label for="bpt">Choose Boarding Point <span>*</span></label>
+                                <select id="boardingpoint" name="boardingpoint" class="form-control">
+                                    <option value="0"> -- Boarding points -- </option>
+                                    <option value="Mohakhali Bus Point (10:30 PM)">Mohakhali Bus Point (10:30 PM)</option>
+                                </select>
+                                <p id="errormsg" class="">Please choose your seat before you continue.</p>
+                            </div>
+                            <input type="hidden" id="searchid" name="searchid">
+                            <a href="javascript:void(0)" onclick="submitConfirm(this)" class="btn btn-default btn-sm"
+                                style="margin-top:20px;">Continue</a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -259,8 +291,8 @@ Online Bus Ticket Reservation System
                 <p id="tripAlert" class="" style="color: #ccc; margin-top:15px; text-align:center;"><i
                         class="fa fa-exclamation-triangle"></i> <i>Due to traffic condition, the trip may get
                         canceled.</i> </p>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Continue</button>
+                <button type="button" class="btn btn-secondary btnClose" data-dismiss="modal">Close</button>
+                {{-- <button type="button" onclick="submitConfirm(this)" class="btn btn-primary">Continue</button> --}}
             </div>
         </div>
     </div>
@@ -273,6 +305,72 @@ Online Bus Ticket Reservation System
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
     });
+    $(document).ready(function() {
+        $('.btnClose').on('click', function () {
+            console.log($(this).closest('.trseats'));
+        // releaseAllSeats($(this).closest('.trseats'));
+        // $(this).closest('table').find('td').css('border-bottom', '15px solid #F7F7F7');
+        // $('.list_rows table td.border-fix-seat').css('border-bottom', '15px solid #F7F7F7');
+        });
+        $(window).on('unload', function(){
+        releaseAllSeats();
+        });
+        $(".view_seat_bg")[0].scrollIntoView();
+        });
+        function toTitleCase(str)
+        {
+        return str.replace(/\b\w/g, function (txt) { return txt.toUpperCase(); });
+        }
+    function submitConfirm(objContBtn) {
+        var allOkay = true;
+        $('#errormsg').addClass('hidden');
+        if ($("#tbl_price_details").find("table#tbl_seat_list").find("tbody:eq(0)").find("tr").length < 1 ) {
+            $("#errormsg") .text("Please choose your seat before you continue.") .removeClass("hidden");
+            allOkay=false; 
+        } else if ($("#boardingpoint").val() < 1) {
+            $("#errormsg") .text("Please choose a boarding point")
+            .removeClass("hidden"); allOkay=false; 
+        } else if ($("#tbl_price_details") .find("table#tbl_seat_list") .find("tbody:eq(0)") .find("tr").length >maxTickets ) { 
+            $("#errormsg") .text("You need to select " + maxTickets + " seats.") .removeClass("hidden");
+            allOkay=false; 
+        }
+        if(allOkay) {
+            $(window).off("unload");
+            $("#searchid").val($("#www-search-id").val());
+            var noOfSeats = $("#tbl_price_details")
+            .find("table#tbl_seat_list")
+            .find("tbody:eq(0)")
+            .find("tr");
+            $.each(noOfSeats,function(index,tr){
+                $('#confirmbooking').append($(tr).contents()[2].childNodes[1]);
+            });
+            // $('#confirmbooking').append(noOfSeats[0].contents()[2].childNodes[2]);
+            $('#confirmbooking').append($(noOfSeats[0]).contents()[2].childNodes[2]);
+            $('form#confirmbooking').submit();
+        }
+
+    }
+    function releaseAllSeats($trSeatsObj)
+    {
+    var $seatTableTr = $('#tbl_price_details').find('table#tbl_seat_list').find('tbody:eq(0)').find('tr');
+    $.each($seatTableTr, function(index, trObj) {
+    //var ticketId = $(trObj).find('input[type="hidden"]').val();
+    var ticketId = $(trObj).find('input[name="ticket[]"]').val();
+    var tripRouteId = $(trObj).find('input[name="triproute[]"]').val();
+    //console.log(ticketId);console.log(tripRouteId);
+    $.ajax({
+    url: '/booking/bus/seat/release',
+    type: 'POST',
+    data: {"ticketid":ticketId,
+    "routeid":tripRouteId
+}
+    }).done(function(data) {});
+    });
+    
+    if ($trSeatsObj) {
+    $trSeatsObj.find('td:eq(0)').html('');
+    }
+    }
     function chooseSeat(seatObj) {
         $('#seatError').addClass('hidden');
         var $seatObj = $(seatObj);
@@ -280,8 +378,10 @@ Online Bus Ticket Reservation System
         var tripData = $seatObj.parent().data('trip');
         var $seatTableBody = $('#tbl_price_details').find('table#tbl_seat_list').find('tbody:eq(0)');
         var discountAmount = 0;
+        
         if($seatObj.hasClass('selected')) {
             $seatObj.removeClass("selected");
+            $seatObj.addClass('seat');
             $('#'+sData.ticket_id).remove();
             $.ajax({
                 url: '/booking/bus/seat/release',
@@ -311,27 +411,21 @@ Online Bus Ticket Reservation System
                 }else {
                     ticketPriceString = ticketPrice;
                 }
-                var tr = '<tr id="' + sData.ticket_id + '"><td width="115">' + sData.seat_number + '</td><td width="100">' + ticketPriceString + '</td><td>' + "Economy" + '<input type="hidden" name="ticket[]" value="' + sData.ticket_id + '"/><input type="hidden" name="triproute[]" value="' + tripData.trip_route_id + '"/></td></tr>';
+                var tr = '<tr id="' + sData.ticket_id + '"><td width="115">' + sData.seat_number + '</td><td width="100">' + ticketPriceString + '</td><td>' + "Economy" + '<input type="hidden" name="'+sData.seat_number +'" value="'  + sData.ticket_id + '"/><input type="hidden" name="triproute[]" value="' + tripData.trip_route_id + '"/>'+ '<input type="hidden" name="trip_id" value="'  + sData.trip_id + '" /></td></tr>';
                 $seatTableBody.append(tr);
-                $.ajax({
-                    url: "{{ route('bookingReserve') }}",
-                    type: "POST",
-                    data: {
-                        "ticketid":sData.ticket_id,
-                    "routeid":tripData.trip_route_id,
-                    }
-                })
-                .done(function(data){
-                    if (data.ticket_id) {
-                        $seatObj.removeClass('selected');
-                        $('#' + sData.ticket_id).remove();
-                        $('#seatError').text('Sorry! this ticket is not available now.');
-                        $('#seatError').removeClass('hidden');
-                        $seatObj.addClass('booked');
-                        $seatObj.removeAttr('onclick');
-                    }
-                });
-              doTicketsTotal(discountValue);
+
+                if($seatObj.hasClass("booked")) {
+                    $seatObj.removeClass("selected");
+                    // alert('#' + sData.ticket_id);
+                    $("#" + sData.ticket_id).remove();
+                    $("#seatError").text(
+                    "Sorry! this ticket is not available now."
+                    );
+                    $("#seatError").removeClass("hidden");
+                    $seatObj.addClass("booked");
+                    $seatObj.removeAttr("onclick");
+                }
+                doTicketsTotal(discountValue);
             }else {
                 $('#seatError').html('<div class="error-partial col-lg-12" style="padding:5px 20px;margin-top:0px;"><i class="fa fa-exclamation-triangle" style="font-size:20px;"></i><div class="error-message-div" style="padding:2px;">Maximum of ' + maxTickets + ' seat(s) can be booked at-a-time.</div></div>');
                 $('#seatError').removeClass('hidden');
@@ -355,10 +449,16 @@ Online Bus Ticket Reservation System
     .booked {
         background: #cc5560;
     }
-    #tbl_offer {
-    border-bottom: 1px dashed #97999b;
-    font-size: 11px;
+
+    .hidden {
+        display: none;
     }
+
+    #tbl_offer {
+        border-bottom: 1px dashed #97999b;
+        font-size: 11px;
+    }
+
     div.seat {
         cursor: pointer;
         background: #d3d3d3;
@@ -367,9 +467,11 @@ Online Bus Ticket Reservation System
     div.seat:hover {
         background: #54c581;
     }
+
     .selected {
         background: #54c581;
     }
+
     .t_total {
         border: #dbdbdb 1px solid;
         font-size: 14px;

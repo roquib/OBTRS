@@ -17,6 +17,7 @@ Route::get('/profile', 'AdminController@profile')->name('profile');
 Route::get('/category', 'AdminController@category')->name('category');
 Route::get('/group', 'AdminController@group')->name('group');
 Route::post('/booking/bus/seat/release', 'PagesController@bookingRelease')->name('bookingRelease');
+Route::post('/booking/bus/confirm', 'PagesController@bookingConfirm')->name('bookingConfirm');
 Route::post('/booking/bus/seat/reserve', 'PagesController@bookingReserve')->name('bookingReserve');
 Route::get('/author', 'AdminController@author')->name('author');
 Route::get('/tickets', 'AdminController@ticket')->name('ticket');
