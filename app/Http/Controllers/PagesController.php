@@ -22,23 +22,28 @@ class PagesController extends Controller
   public function bookingConfirm(Request $request)
   {
     $seats = [
-      'A1','B1','C1','D1','E1','F1','G1','H1','I1','J1',
-      'A2','B2','C2','D2','E2','F2','G2','H2','I2','J2',
-      'A3','B3','C3','D3','E3','F3','G3','H3','I3','J3',
-      'A4','B4','C4','D4','E4','F4','G4','H4','I4','J4',
+      'A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1',
+      'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2',
+      'A3', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'H3', 'I3', 'J3',
+      'A4', 'B4', 'C4', 'D4', 'E4', 'F4', 'G4', 'H4', 'I4', 'J4',
     ];
     $Number_of_seats_exists = [];
     foreach ($request->all() as $key => $value) {
-        if (in_array($key, $seats)) {
-          array_push($Number_of_seats_exists, $key);
-        }
+      if (in_array($key, $seats)) {
+        array_push($Number_of_seats_exists, $key);
+      }
     }
-    return view('public_user.pages.ticket_confirm',
+    $detail = Detail::where('trip_id', $request->trip_id)->get();
+    // dd($detail);
+    return view(
+      'public_user.pages.ticket_confirm',
       [
         'seats' => $Number_of_seats_exists,
         'trip_id' => $request->trip_id,
-        'boarding_point' => $request->boardingpoint
-      ]);
+        'boarding_point' => $request->boardingpoint,
+        'detail' => $detail
+      ]
+    );
   }
   public function bookingReserve(Request $request)
   {
@@ -55,6 +60,7 @@ class PagesController extends Controller
       ->where('departure_date', '=', $doj)
       ->get();
     $sellTickets = SellTicket::all();
+    // dd($result);
     return view('public_user.pages.bus-search', ['result' => $result, 'data' => $request, 'sellTickets' => $sellTickets]);
   }
   public function index(Request $request)
