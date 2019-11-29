@@ -9,7 +9,7 @@
     <li class="nav-item">
       <!-- Brand Logo -->
       <a href="#" class="nav-link">
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="brand-image img-circle">
+        <img src="{{ asset('img/logo.png') }}" style="height: inherit;" alt="Logo" class="brand-image img-circle">
         <span class="brand-text font-weight-bold">Redbus</span>
       </a>
     </li>
