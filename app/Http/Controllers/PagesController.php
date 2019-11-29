@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+  public function confirm(Request $request)
+  { 
+    dd($request);
+  }
   public function bookingRelease(Request $request)
   {
     return json_encode(["ticketid" => $request->ticketid, "routeid" => $request->routeid]);

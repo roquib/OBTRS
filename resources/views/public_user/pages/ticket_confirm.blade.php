@@ -9,7 +9,8 @@ Ticket Confirmation
 </h1>
 @else
 <div class="container">
-	<form action="#" method="post">
+	<form action="{{ route('ticketconfirm') }}" method="post">
+		@csrf
 		<div class="row mb-5">
 			<div class="col-md-8">
 				<div class="p_head" style="border-bottom: 2px solid red;">
@@ -19,13 +20,13 @@ Ticket Confirmation
 					<div class="row">
 						<div class="col-md-8">
 							<label for="name">Name*</label>
-							<input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name">
+							<input type="text" class="form-control" name="p_name" id="name" placeholder="Enter your Name">
 						</div>
 						<div class="col-md-4">
 							<label for="gender">Gender*</label>
 							<div class="form-group">
-								<input type="radio" name="gender" id="gender" value="male">M
-								<input type="radio" name="gender" id="gender" value="female">F
+								<input type="radio" name="p_gender" id="gender" value="male">M
+								<input type="radio" name="p_gender" id="gender" value="female">F
 							</div>
 						</div>
 					</div>
@@ -37,12 +38,12 @@ Ticket Confirmation
 						</div>
 						<div class="form-group">
 							<label for="mobile">Mobile*</label>
-							<input type="text" name="mobile" class="form-control" id="mobile"
+							<input type="text" name="p_mobile" class="form-control" id="mobile"
 								placeholder="Enter Mobile Number">
 						</div>
 						<div class="form-group-sm">
 							<label for="email">Email*</label>
-							<input type="text" name="email" id="email" class="form-control-sm"
+							<input type="text" name="p_email" id="email" class="form-control-sm"
 								placeholder="Enter your Email">
 						</div>
 					</div>
@@ -54,14 +55,22 @@ Ticket Confirmation
 				</div>
 				@foreach ($detail as $dt)
 				<h4 class="text-danger">{{$dt->origin_city_name}} - {{$dt->destination_city_name}}</h4>
+				<input type="hidden" name="trip_id" value="{{$dt->trip_id}}">
+				<input type="hidden" name="origin_city_name" value="{{$dt->origin_city_name}}">
+				<input type="hidden" name="destination_city_name" value="{{$dt->destination_city_name}}">
 				<p>{{$dt->company_name}}</p>
+				<input type="hidden" name="company_name" value="{{$dt->company_name}}">
 				<p>{{$dt->departure_date}},{{$dt->departure_time}}</p>
+				<input type="hidden" name="departure_date" value="{{$dt->departure_date}}">
+				<input type="hidden" name="departure_time" value="{{$dt->departure_time}}">
 				{{-- <p>{{date('d,Y',strtotime($dt->departure_date))}}</p> --}}
 				Seat NO(s):
 				@foreach ($seats as $key => $value)
 				<span class="text-danger">{{$value }} </span>
+				<input type="hidden" name="{{$value}}" value="{{$value}}">
 				@endforeach
 				<p>Boarding Point: <span>{{$boarding_point}}</span> </p>
+				<input type="hidden" name="boarding_point" value="{{$boarding_point}}">
 				@endforeach
 			</div>
 		</div>
@@ -86,6 +95,7 @@ Ticket Confirmation
 						@endphp
 						@endforeach
 						{{$total}}
+						<input type="hidden" name="total" value="{{$total}}">
 					</div>
 				</div> <br>
 				<div class="discount" style="border-bottom: 1px solid black;">
@@ -117,6 +127,7 @@ Ticket Confirmation
 							<a class="nav-link active" id="pills-cash-tab" data-toggle="pill" href="#pills-cash"
 								role="tab" aria-controls="pills-cash" aria-selected="true">Cash</a>
 						</li>
+						<input type="hidden" name="payment" value="cash">
 						<li class="nav-item">
 							<a class="nav-link" id="pills-bkash-tab" data-toggle="pill" href="#pills-bkash" role="tab"
 								aria-controls="pills-bkash" aria-selected="false">Bkash</a>
@@ -130,6 +141,40 @@ Ticket Confirmation
 								and verify your credentials Ticket would become active when you pay the due amount
 								during the delivery of ticket(s) at your doorstep.
 							</span>
+										<div class="row">
+											<div class="col">
+												<label for="city">City</label>
+												<input type="text" class="form-control" name="city" placeholder="Dhaka">
+											</div>
+											<div class="col">
+												<label for="Area">Area</label>
+												<input type="text" class="form-control" name="area" placeholder="Abdullapur">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+												<label for="first_name">First Name</label>
+												<input type="text" class="form-control" name="first_name" placeholder="Enter First Name">
+											</div>
+											<div class="col">
+												<label for="last_name">Last Name</label>
+												<input type="text" class="form-control" name="last_name" placeholder="Enter Last Name">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+												<label for="address">Address</label>
+												<input type="text" name="address" placeholder="Enter Address" class="form-control">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+												<label for="alternate_contact">Alternate Contact Number</label>
+												<input type="text" name="alternate_contact" placeholder="Enter Alternate Contact Number" class="form-control">
+											</div>
+										</div>
+										<input type="submit" class="text-center btn btn-primary mt-2" value="Confirm Reservation">
+							</div>
 						</div>
 						<div class="tab-pane fade" id="pills-bkash" role="tabpanel" aria-labelledby="pills-bkash-tab">
 							Bkash</div>

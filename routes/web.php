@@ -20,6 +20,7 @@ Route::post('/booking/bus/seat/release', 'PagesController@bookingRelease')->name
 Route::post('/booking/bus/confirm', 'PagesController@bookingConfirm')->name('bookingConfirm');
 Route::post('/booking/bus/seat/reserve', 'PagesController@bookingReserve')->name('bookingReserve');
 Route::get('/author', 'AdminController@author')->name('author');
+Route::post('/ticket/status/confirm', 'PagesController@confirm')->name('ticketconfirm');
 Route::get('/tickets', 'AdminController@ticket')->name('ticket');
 Route::get('/details', 'AdminController@details')->name('details');
 Route::get('/publication', 'AdminController@publication')->name('admin.publication');
