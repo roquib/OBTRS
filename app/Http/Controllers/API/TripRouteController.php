@@ -82,7 +82,7 @@ class TripRouteController extends Controller
       'arrival_date'        => $request['arrival_date'],
       'arrival_time'        => $request['arrival_time'],
       'trip_number'        => $request['trip_number'],
-      'bus_type_id'        => $request['bus_type_id'],
+      'bus_type_id'        => 2,
       'bus_desc'        => $request['bus_desc'],
     ]);
   }
