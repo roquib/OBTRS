@@ -20,7 +20,7 @@ class TripRoute extends Model
         'arrival_date',
         'arrival_time',
         'trip_number',
-        'bus_type-id',
+        'bus_type_id',
         'bus_desc',
     ];
     public function company()
