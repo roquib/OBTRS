@@ -15,7 +15,7 @@ class BoardingController extends Controller
    */
   public function index()
   {
-    // return Boarding::latest()->paginate(10);
+    return Boarding::latest()->paginate(10);
     $details = Boarding::with('counter')->paginate(5);
   }
   public function boarding_list()

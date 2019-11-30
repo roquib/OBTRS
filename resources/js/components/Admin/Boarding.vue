@@ -258,18 +258,28 @@
             counter => counter === this.selectedCounterName
           );
           this.selectedCounterName = this.counters[index];
+          this.form.counter_name = this.counters[index];
           this.selectedCounterAddress = this.counter_addresses[index];
+          this.form.counter_address = this.counter_addresses[index];
           this.selectedCounterId = this.counter_ids[index];
+          this.form.counter_id = this.counter_ids[index];
         }
         if (this.select_location_name != null) {
           const index = this.location_names.findIndex(
             location => location === this.select_location_name
           );
+          this.form.location_name = this.select_location_name;
           this.select_location_id = this.ids[index];
+          this.form.location_id = this.ids[index];
           this.select_location_status = this.statuses[index];
+          this.form.location_status = this.statuses[index];
           this.select_location_type = this.types[index];
           this.select_location_date = this.dates[index];
           this.select_location_time = this.times[index];
+          this.form.trip_point_id = this.ids[index];
+          this.form.location_type = this.types[index];
+          this.form.location_date = this.dates[index];
+          this.form.location_time = this.times[index];
         }
       }
     },
