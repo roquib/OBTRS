@@ -102,7 +102,7 @@ function validateBusForm(formObj)
         $jDateObj.focus();
         alert('Please select date of your journey.');
     } else {
-        var searchUrl = 'http://localhost:8000/home/buses/search?fromcity=' + $fromCityObj.val() + '&tocity=' + $toCityObj.val() + '&doj=' + $jDateObj.val() + '&dor=' + $rDateObj.val();
+        var searchUrl = '/home/buses/search?fromcity=' + $fromCityObj.val() + '&tocity=' + $toCityObj.val() + '&doj=' + $jDateObj.val() + '&dor=' + $rDateObj.val();
         if(typeof operatorFilterId != 'undefined') {
             searchUrl += '&operator=' + operatorFilterId;
         }
