@@ -63,9 +63,9 @@ class PagesController extends Controller
       ->where('destination_city_name', '=', $tocity)
       ->where('departure_date', '=', $doj)
       ->get();
-    $sellTickets = SellTicket::all();
+    // $sellTickets = SellTicket::all();
     // dd($result);
-    return view('public_user.pages.bus-search', ['result' => $result, 'data' => $request, 'sellTickets' => $sellTickets]);
+    return view('public_user.pages.bus-search', ['result' => $result, 'data' => $request]);
   }
   public function index(Request $request)
   {
