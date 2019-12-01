@@ -46,7 +46,7 @@ class Detail extends Model
 	public function seatAvailable($trip_id, $seat_number)
 	{
 		// return json_encode(["trip_id"=> $trip_id,"seat_number" => $seat_number]);
-		$a = DB::table('sell_tickets')->where('trip_id', $trip_id)->where('seat_number', $seat_number)->get()->first();
+		$a = json_encode(DB::table('sell_tickets')->where('trip_id', $trip_id)->where('seat_number', $seat_number)->get()->first());
 		if ($a->seat_available === 0) {
 			return 0;
 		} else {
