@@ -188,11 +188,16 @@ Online Bus Ticket Reservation System
                             {{-- {{dd($detail->seatAvailable($detail->trip_id,$seatRow[$i].'2'))}} --}}
                             {{-- <td style="width: 50px; margin:5px" data-seat="{{$detail->trip_id.' '.$seatRow[$i].'1'}}">
                             --}}
-                            <td style="width: 50px; margin:5px" data-trip="{{$detail}}"
-                                data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'1')}}">
-                                <div class="text-center p-10 {{$detail->seatAvailable($detail->trip_id,$seatRow[$i].'1')  === 0 ? 'booked' : 'seat' }}"
-                                    title="{{$seatRow[$i].'1'}}" data-toggle="tooltip" onclick="chooseSeat(this)">
-                                    {{$seatRow[$i].'1'}}
+                            {{-- {{dd($detail->findTicket(1,'A1'))}} --}}
+                            @php
+                            $arr_seat = $seatRow[$i].'1';
+                            $data = $detail->findTicket($detail->trip_id,strval($arr_seat));
+                            @endphp
+
+                            <td style="width: 50px; margin:5px" data-trip="{{$detail}}" data-seat="{{$data}}">
+                                <div class="text-center p-10 {{$detail->seatAvailable($detail->trip_id,$arr_seat)  === 0 ? 'booked' : 'seat' }}"
+                                    title="{{$arr_seat}}" data-toggle="tooltip" onclick="chooseSeat(this)">
+                                    {{$arr_seat}}
                                 </div>
                             </td>
                             <td style="width: 50px; margin:5px;"
