@@ -87,7 +87,7 @@ Ticket Confirmation
 					<h4>Fare Details</h4>
 				</div><br>
 				@php
-				$ticket_price = $dep_date;
+				$ticket_price = (int)$dep_date;
 				$total = 0;
 				$discount = 0;
 				@endphp
