@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
   public function confirm(Request $request)
-  { 
+  {
     dd($request);
   }
   public function bookingRelease(Request $request)
@@ -39,6 +39,7 @@ class PagesController extends Controller
     }
     $detail = Detail::where('trip_id', $request->trip_id)->get();
     // dd($detail);
+    dd($Number_of_seats_exists);
     return view(
       'public_user.pages.ticket_confirm',
       [
