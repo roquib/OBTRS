@@ -185,11 +185,12 @@ Online Bus Ticket Reservation System
                         </tr>
                         @for ($i = 0; $i < 10; $i++) <tr style="height: 30px !important">
                             @foreach ($result as $detail)
+                            {{-- {{dd($detail->seatAvailable($detail->trip_id,$seatRow[$i].'2'))}} --}}
                             {{-- <td style="width: 50px; margin:5px" data-seat="{{$detail->trip_id.' '.$seatRow[$i].'1'}}">
                             --}}
                             <td style="width: 50px; margin:5px" data-trip="{{$detail}}"
                                 data-seat="{{$detail->findTicket($detail->trip_id,$seatRow[$i].'1')}}">
-                                <div class="text-center p-10 {{$detail->seatAvailable($detail->trip_id,$seatRow[$i].'1')  == 0 ? 'booked disabled' : 'seat' }}"
+                                <div class="text-center p-10 {{$detail->seatAvailable($detail->trip_id,$seatRow[$i].'1')  === 0 ? 'booked' : 'seat' }}"
                                     title="{{$seatRow[$i].'1'}}" data-toggle="tooltip" onclick="chooseSeat(this)">
                                     {{$seatRow[$i].'1'}}
                                 </div>
@@ -276,7 +277,8 @@ Online Bus Ticket Reservation System
                                 <label for="bpt">Choose Boarding Point <span>*</span></label>
                                 <select id="boardingpoint" name="boardingpoint" class="form-control">
                                     <option value="0"> -- Boarding points -- </option>
-                                    <option value="Mohakhali Bus Point (10:30 PM)">Mohakhali Bus Point (10:30 PM)</option>
+                                    <option value="Mohakhali Bus Point (10:30 PM)">Mohakhali Bus Point (10:30 PM)
+                                    </option>
                                 </select>
                                 <p id="errormsg" class="">Please choose your seat before you continue.</p>
                             </div>
