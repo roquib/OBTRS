@@ -20,7 +20,8 @@ Ticket Confirmation
 					<div class="row">
 						<div class="col-md-8">
 							<label for="name">Name*</label>
-							<input type="text" class="form-control" name="p_name" id="name" placeholder="Enter your Name">
+							<input type="text" class="form-control" name="p_name" id="name"
+								placeholder="Enter your Name">
 						</div>
 						<div class="col-md-4">
 							<label for="gender">Gender*</label>
@@ -53,6 +54,9 @@ Ticket Confirmation
 				<div class="page-title" style="border-bottom: 2px solid black;">
 					<h4>Journey Details</h4>
 				</div>
+				@php
+				$dep_date = "temp";
+				@endphp
 				@foreach ($detail as $dt)
 				<h4 class="text-danger">{{$dt->origin_city_name}} - {{$dt->destination_city_name}}</h4>
 				<input type="hidden" name="trip_id" value="{{$dt->trip_id}}">
@@ -62,6 +66,9 @@ Ticket Confirmation
 				<input type="hidden" name="company_name" value="{{$dt->company_name}}">
 				<p>{{$dt->departure_date}},{{$dt->departure_time}}</p>
 				<input type="hidden" name="departure_date" value="{{$dt->departure_date}}">
+				@php
+				$dep_date = $dt->economy_class_fare;
+				@endphp
 				<input type="hidden" name="departure_time" value="{{$dt->departure_time}}">
 				{{-- <p>{{date('d,Y',strtotime($dt->departure_date))}}</p> --}}
 				Seat NO(s):
@@ -80,7 +87,7 @@ Ticket Confirmation
 					<h4>Fare Details</h4>
 				</div><br>
 				@php
-				$ticket_price = $dt->economy_class_fare;
+				$ticket_price = $dep_date;
 				$total = 0;
 				$discount = 0;
 				@endphp
@@ -91,7 +98,7 @@ Ticket Confirmation
 					<div class="float-right">
 						@foreach ($seats as $seat)
 						@php
-							$total += $ticket_price;
+						$total += $ticket_price;
 						@endphp
 						@endforeach
 						{{$total}}
@@ -105,7 +112,7 @@ Ticket Confirmation
 				<div class="total" style="border-bottom: 1px solid black;">
 					<div class="float-left">Total</div>
 					@php
-						$total += $discount;
+					$total += $discount;
 					@endphp
 					<div class="float-right">{{$total}}</div>
 				</div> <br>
@@ -141,49 +148,52 @@ Ticket Confirmation
 								and verify your credentials Ticket would become active when you pay the due amount
 								during the delivery of ticket(s) at your doorstep.
 							</span>
-										<div class="row">
-											<div class="col">
-												<label for="city">City</label>
-												<input type="text" class="form-control" name="city" placeholder="Dhaka">
-											</div>
-											<div class="col">
-												<label for="Area">Area</label>
-												<input type="text" class="form-control" name="area" placeholder="Abdullapur">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col">
-												<label for="first_name">First Name</label>
-												<input type="text" class="form-control" name="first_name" placeholder="Enter First Name">
-											</div>
-											<div class="col">
-												<label for="last_name">Last Name</label>
-												<input type="text" class="form-control" name="last_name" placeholder="Enter Last Name">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col">
-												<label for="address">Address</label>
-												<input type="text" name="address" placeholder="Enter Address" class="form-control">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col">
-												<label for="alternate_contact">Alternate Contact Number</label>
-												<input type="text" name="alternate_contact" placeholder="Enter Alternate Contact Number" class="form-control">
-											</div>
-										</div>
-										<input type="submit" class="text-center btn btn-primary mt-2" value="Confirm Reservation">
+							<div class="row">
+								<div class="col">
+									<label for="city">City</label>
+									<input type="text" class="form-control" name="city" placeholder="Dhaka">
+								</div>
+								<div class="col">
+									<label for="Area">Area</label>
+									<input type="text" class="form-control" name="area" placeholder="Abdullapur">
+								</div>
 							</div>
+							<div class="row">
+								<div class="col">
+									<label for="first_name">First Name</label>
+									<input type="text" class="form-control" name="first_name"
+										placeholder="Enter First Name">
+								</div>
+								<div class="col">
+									<label for="last_name">Last Name</label>
+									<input type="text" class="form-control" name="last_name"
+										placeholder="Enter Last Name">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="address">Address</label>
+									<input type="text" name="address" placeholder="Enter Address" class="form-control">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="alternate_contact">Alternate Contact Number</label>
+									<input type="text" name="alternate_contact"
+										placeholder="Enter Alternate Contact Number" class="form-control">
+								</div>
+							</div>
+							<input type="submit" class="text-center btn btn-primary mt-2" value="Confirm Reservation">
 						</div>
-						<div class="tab-pane fade" id="pills-bkash" role="tabpanel" aria-labelledby="pills-bkash-tab">
-							Bkash</div>
 					</div>
+					<div class="tab-pane fade" id="pills-bkash" role="tabpanel" aria-labelledby="pills-bkash-tab">
+						Bkash</div>
 				</div>
 			</div>
-
 		</div>
-	</form>
+
+</div>
+</form>
 </div>
 @endif
 @endsection
