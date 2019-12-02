@@ -39,7 +39,7 @@ class PagesController extends Controller
     }
     $detail = Detail::where('trip_id', $request->trip_id)->get();
     // dd($detail);
-    dd($Number_of_seats_exists, $request->trip_id, $request->boardingpoint, $detail);
+    // dd($Number_of_seats_exists, $request->trip_id, $request->boardingpoint, $detail);
     return view(
       'public_user.pages.ticket_confirm',
       [
