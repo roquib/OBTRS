@@ -42,9 +42,10 @@ class Detail extends Model
 	{
 		// return json_encode(["trip_id"=> $trip_id,"seat_number" => $seat_number]);
 		// $str = strval($seat_number);
-		$sql = "select * from sell_tickets where trip_id=" . 2 . " and seat_number='" . $seat_number . "'";
+		$sql = "select * from sell_tickets where trip_id=" . 1 . " and seat_number='" . $seat_number . "'";
+		// dd($sql);
 		// return $sql;
-		$result = json_encode(DB::select(DB::raw($sql))[0]);
+		$result = json_encode(DB::select(DB::raw($sql)));
 		return $result;
 		// return json_encode(SellTicket::where("trip_id", $trip_id)->where("seat_number", strval($seat_number))->get()->first());
 	}

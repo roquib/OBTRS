@@ -385,15 +385,15 @@ Online Bus Ticket Reservation System
         var tripData = $seatObj.parent().data('trip');
         var $seatTableBody = $('#tbl_price_details').find('table#tbl_seat_list').find('tbody:eq(0)');
         var discountAmount = 0;
-        
+        // console.log(sData[0]);
         if($seatObj.hasClass('selected')) {
             $seatObj.removeClass("selected");
             $seatObj.addClass('seat');
-            $('#'+sData.ticket_id).remove();
+            $('#'+sData[0].ticket_id).remove();
             $.ajax({
                 url: '/booking/bus/seat/release',
                 type: 'POST',
-                data: {"ticketid":sData.ticket_id,
+                data: {"ticketid":sData[0].ticket_id,
                     "routeid":tripData.trip_route_id,
                     "searchid":$('#www-search-id').val()}
             }).done(function(data) {
@@ -418,13 +418,13 @@ Online Bus Ticket Reservation System
                 }else {
                     ticketPriceString = ticketPrice;
                 }
-                var tr = '<tr id="' + sData.ticket_id + '"><td width="115">' + sData.seat_number + '</td><td width="100">' + ticketPriceString + '</td><td>' + "Economy" + '<input type="hidden" name="'+sData.seat_number +'" value="'  + sData.ticket_id + '"/><input type="hidden" name="triproute[]" value="' + tripData.trip_route_id + '"/>'+ '<input type="hidden" name="trip_id" value="'  + sData.trip_id + '" /></td></tr>';
+                var tr = '<tr id="' + sData[0].ticket_id + '"><td width="115">' + sData[0].seat_number + '</td><td width="100">' + ticketPriceString + '</td><td>' + "Economy" + '<input type="hidden" name="'+sData[0].seat_number +'" value="'  + sData[0].ticket_id + '"/><input type="hidden" name="triproute[]" value="' + tripData.trip_route_id + '"/>'+ '<input type="hidden" name="trip_id" value="'  + sData[0].trip_id + '" /></td></tr>';
                 $seatTableBody.append(tr);
 
                 if($seatObj.hasClass("booked")) {
                     $seatObj.removeClass("selected");
                     // alert('#' + sData.ticket_id);
-                    $("#" + sData.ticket_id).remove();
+                    $("#" + sData[0].ticket_id).remove();
                     $("#seatError").text(
                     "Sorry! this ticket is not available now."
                     );
