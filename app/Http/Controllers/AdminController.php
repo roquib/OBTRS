@@ -21,7 +21,7 @@ class AdminController extends Controller
       'admin.dashboard',
       [
         'todaysTotalOrder'  => SellTicket::where('created_at', '>=', Carbon::today())->get(),
-        'totalPendingOrder' => DB::table('sell_tickets')->where('seat_available', 0);
+        'totalPendingOrder' => DB::table('sell_tickets')->where('seat_available', 0)
       ]
     );
   }
@@ -73,7 +73,7 @@ class AdminController extends Controller
   {
     return view('admin.details');
   }
-  
+
   public function operator()
   {
     return view('admin.operator');
@@ -82,5 +82,4 @@ class AdminController extends Controller
   {
     return view('admin.boarding');
   }
-  
 }
