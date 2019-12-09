@@ -32,7 +32,7 @@ class SellTicketController extends Controller
     // validation
     $lastTicket = SellTicket::latest()->first()->ticket_id;
     $seatRow = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-    $NumberOfSeats = $request->available_seats;
+    $NumberOfSeats = 40;
     $this->validate($request, [
       'trip_id'      => 'required',
       'company_id'      => 'required',
